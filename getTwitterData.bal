@@ -33,8 +33,9 @@ connector Twitter(string consumerKey, string consumerSecret, string accessToken,
         string tweetPath = "/1.1/search/tweets.json";
         query = uri:encode(query);
         parameters["q"] = query;
-        parameters["geocode"]="6.9271,79.8612,1mi";
-        urlParams = "q=" + query +"&geocode=6.9271,79.8612,1mi";
+        string geo=uri:encode("6.9271,79.8612,1mi");
+        parameters["geocode"]=geo;
+        urlParams = "q=" + query +"&geocode="+geo;
         constructRequestHeaders(request, "GET", tweetPath, consumerKey, consumerSecret, accessToken,
                                 accessTokenSecret, parameters);
         tweetPath = tweetPath + "?" + urlParams;
