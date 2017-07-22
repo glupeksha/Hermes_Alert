@@ -9,10 +9,10 @@ import ballerina.lang.arrays;
 import ballerina.lang.maps;
 
 
-string consumerKey = "y76e1sGq7CfdfMZhVLn6x84wC";
-string consumerSecret = "EolV7ImcqHxX4AAxIa4neJAtCptqg8iyvlK7SkhW6dOI2c217N";
-string accessToken = "2841068630-JhDia4q0f05FeX9rMBZ0pQzDvWgjV79BYHobSOe";
-string accessTokenSecret = "iXC4yyGPERasALQ4S6SXDfZlpzBMBASqwV3aD3JLvaC30";
+string consumerKey = "xxxxxxxxxxxxxxxxxxxxxxxxxx";
+string consumerSecret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+string accessToken = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+string accessTokenSecret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 function main (string[] args) {
     Twitter twitterConnector = create Twitter(consumerKey, consumerSecret, accessToken, accessTokenSecret);
