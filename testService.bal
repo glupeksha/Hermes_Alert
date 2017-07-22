@@ -1,5 +1,4 @@
 import ballerina.lang.system;
-import ballerina.lang.jsons;
 import ballerina.lang.messages;
 import ballerina.lang.strings;
 import ballerina.net.http;
@@ -14,14 +13,21 @@ string consumerSecret = "EolV7ImcqHxX4AAxIa4neJAtCptqg8iyvlK7SkhW6dOI2c217N";
 string accessToken = "2841068630-JhDia4q0f05FeX9rMBZ0pQzDvWgjV79BYHobSOe";
 string accessTokenSecret = "iXC4yyGPERasALQ4S6SXDfZlpzBMBASqwV3aD3JLvaC30";
 
-function main (string[] args) {
-    Twitter twitterConnector = create Twitter(consumerKey, consumerSecret, accessToken, accessTokenSecret);
-    message tweetResponse = Twitter.search(twitterConnector, "chester");
-    json tweetJSONResponse = messages:getJsonPayload(tweetResponse);
-    system:println(jsons:toString(tweetJSONResponse));}
+@http:configuration {basePath:"/hello"}
+service<http> HelloService {
 
-function getTweets(){
-
+    @http:GET {}
+    @http:Path {value:"/"}
+    resource sayHello (message m) {
+        message response = {};
+        Twitter twitterConnector = create Twitter(consumerKey, consumerSecret, accessToken, accessTokenSecret);
+        message tweetResponse = Twitter.search(twitterConnector, "chester");
+        json tweetJSONResponse = messages:getJsonPayload(tweetResponse);
+        messages:setJsonPayload(response,tweetJSONResponse);
+        //messages:setStringPayload(response, jsons:toString(tweetJSONResponse));
+        //system:println();
+        reply response;
+    }
 }
 
 connector Twitter(string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret) {
