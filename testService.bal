@@ -36,7 +36,10 @@ service<http> HelloService {
             json family = tweetJSONResponse.statuses;
             while (true) {
                 json e = family[i];
-                if(strings:contains(jsons:toString(e.text),"flood")){
+                string text=jsons:toString(e.text);
+                string created_at=jsons:toString(e.created_at);
+                if(strings:contains(text,"flood")){
+                    response_text=response_text+text+"\n"+created_at+"\n\n";
                     hits=hits+1;
                 }
                 i = i + 1;
@@ -52,7 +55,7 @@ service<http> HelloService {
             }
         }
 
-        messages:setStringPayload(response,<string>hits);
+        messages:setStringPayload(response,response_text+"**Number of tweets regarding floods : "+hits+"**");
         reply response;
     }
 }
@@ -66,7 +69,7 @@ connector Twitter(string consumerKey, string consumerSecret, string accessToken,
         string tweetPath = "/1.1/search/tweets.json";
         query = uri:encode(query);
         parameters["q"] = query;
-        string geo=uri:encode("6.9271,79.8612,5mi");
+        string geo=uri:encode("6.9271,79.8612,50mi");
         parameters["geocode"]=geo;
         urlParams = "q=" + query +"&geocode="+geo;
         constructRequestHeaders(request, "GET", tweetPath, consumerKey, consumerSecret, accessToken,
