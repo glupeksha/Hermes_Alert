@@ -18,3 +18,10 @@ Download testService.bal and run the follwing command in the cmd/terminal at the
 In a new browser window connect to http://localhost:9090/hello to obtain output 
 
 
+###Version Log
+
+~Version 0.01a
+
+Retrieves potential tweets related to floods using keywords
+
+Displays number of tweets related to floods using keywords 
