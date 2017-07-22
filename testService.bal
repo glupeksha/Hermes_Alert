@@ -12,10 +12,10 @@ import ballerina.lang.errors;
 import ballerina.lang.jsons;
 
 
-string consumerKey = "y76e1sGq7CfdfMZhVLn6x84wC";
-string consumerSecret = "EolV7ImcqHxX4AAxIa4neJAtCptqg8iyvlK7SkhW6dOI2c217N";
-string accessToken = "2841068630-JhDia4q0f05FeX9rMBZ0pQzDvWgjV79BYHobSOe";
-string accessTokenSecret = "iXC4yyGPERasALQ4S6SXDfZlpzBMBASqwV3aD3JLvaC30";
+string consumerKey = "xxxxxxxxxxxxxxxxxxxxx";
+string consumerSecret = "xxxxxxxxxxxxxxxxxxxxxxxxxx";
+string accessToken = "xxxxxxxxxxxxxxxxxxxxxxxxx";
+string accessTokenSecret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 message tweetResponse;
 json tweetJSONResponse;
@@ -62,7 +62,7 @@ service<http> HelloService {
             }
         }
 
-        string link="\nFind relevant tweet at https://twitter.com/isuru117";
+        string link="\nFind relevant tweet at your twitter app URL here";
         messages:setStringPayload(response,response_text+"**Number of tweets regarding floods : "+hits+"**"+link);
         string tweet="Number of tweets regarding floods "+<string>hits+" #lka";
         postTweet(tweet);
