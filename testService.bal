@@ -6,6 +6,8 @@ import ballerina.net.uri;
 import ballerina.utils;
 import ballerina.lang.arrays;
 import ballerina.lang.maps;
+import ballerina.lang.errors;
+import ballerina.lang.jsons;
 
 
 string consumerKey = "y76e1sGq7CfdfMZhVLn6x84wC";
@@ -21,11 +23,36 @@ service<http> HelloService {
     resource sayHello (message m) {
         message response = {};
         Twitter twitterConnector = create Twitter(consumerKey, consumerSecret, accessToken, accessTokenSecret);
-        message tweetResponse = Twitter.search(twitterConnector, "chester");
+        message tweetResponse = Twitter.search(twitterConnector, "flood");
         json tweetJSONResponse = messages:getJsonPayload(tweetResponse);
-        messages:setJsonPayload(response,tweetJSONResponse);
+        //messages:setJsonPayload(response,tweetJSONResponse);
         //messages:setStringPayload(response, jsons:toString(tweetJSONResponse));
         //system:println();
+
+        int i=0;
+        string response_text;
+        int hits =0;
+        try {
+            json family = tweetJSONResponse.statuses;
+            while (true) {
+                json e = family[i];
+                if(strings:contains(jsons:toString(e.text),"flood")){
+                    hits=hits+1;
+                }
+                i = i + 1;
+            }
+        } catch (errors:Error e) {
+            string msg = e.msg;
+            if (!strings:contains(msg, "array index out of range")) {
+                system:println(msg);
+                throw e;
+            } else {
+                system:println("length of array: " + i);
+                // Ignore the error.
+            }
+        }
+
+        messages:setStringPayload(response,<string>hits);
         reply response;
     }
 }
