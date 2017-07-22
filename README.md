@@ -11,9 +11,10 @@ This is currently under development...
 
 Download and setup ballerina-tools 0.90 from https://ballerinalang.org/downloads/
 
-Download testService.bal and run the follwing command in the command line at the downloaded PATH
+Download testService.bal and run the follwing command in the cmd/terminal at the downloaded PATH
 
 ``ballerina run testService.bal``
 
+In a new browser window connect to http://localhost:9090/hello to obtain output 
 
 
